@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="Cliente")
-public class ClientModel {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Column(name="nome")
     private String name;
     @Column
     private String email;

@@ -1,11 +1,10 @@
 package org.myproject.crm.rest;
 
+import org.myproject.crm.model.Client;
 import org.myproject.crm.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/client")
@@ -15,12 +14,12 @@ public class ClientController {
         this.clientService = clientService;
     }
     @GetMapping
-    public ResponseEntity <List<String>> getClients(){
-        return ResponseEntity.ok(clientService.getClients());
+    public ResponseEntity <Iterable<Client>> getClient(){
+        return ResponseEntity.ok(clientService.getClient());
     }
     @PostMapping
-    public ResponseEntity addClientService(@RequestBody String client){
-        this.clientService.setClients(client);
+    public ResponseEntity addClient(@RequestBody Client client){
+        this.clientService.addClient(client);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
