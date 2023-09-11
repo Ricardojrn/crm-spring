@@ -18,12 +18,8 @@ public class ClientController {
         this.clientService = clientService;
     }
     @GetMapping("{id}")
-    public ResponseEntity getClientById(@PathVariable("id") int idClient){
-        Optional<Client> client = clientService.getClientById(idClient);
-        if (client.isPresent()){
-            return ResponseEntity.ok(client.get());
-        }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    public ResponseEntity<Client> getClientById(@PathVariable("id") int idClient){
+        return ResponseEntity.ok(clientService.getClientById(idClient));
     }
     @GetMapping
     public ResponseEntity <Iterable<Client>> getClient(){

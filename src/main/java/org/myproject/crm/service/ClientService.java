@@ -2,6 +2,7 @@ package org.myproject.crm.service;
 
 import org.modelmapper.ModelMapper;
 import org.myproject.crm.dtos.ClientInputDTO;
+import org.myproject.crm.exceptions.ResourceNotFoundException;
 import org.myproject.crm.model.Client;
 import org.myproject.crm.repository.ClientRepository;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,11 @@ public class ClientService {
         this.clienterepository.save(clientToPersist);
     }
 
-    public Optional<Client> getClientById(int idClient) {
-        return this.clienterepository.findById(idClient);
+    public Client getClientById(int idClient) {
+        Optional<Client> client = this.clienterepository.findById(idClient);
+        if (client.isEmpty()){
+            throw new ResourceNotFoundException("Client do not exist");
+        }
+        return client.get();
     }
 }
